@@ -5,6 +5,7 @@ import com.codahale.metrics.annotation.Timed;
 import com.amin.realty.domain.User;
 import com.amin.realty.repository.UserRepository;
 import com.amin.realty.security.AuthoritiesConstants;
+import com.amin.realty.security.SecurityUtils;
 import com.amin.realty.service.MailService;
 import com.amin.realty.service.UserService;
 import com.amin.realty.service.dto.UserDTO;
@@ -89,11 +90,18 @@ public class UserResource {
      */
     @PostMapping("/users")
     @Timed
-    @Secured(AuthoritiesConstants.ADMIN)
+    @Secured({AuthoritiesConstants.ADMIN, AuthoritiesConstants.BROKER})    
     public ResponseEntity createUser(@Valid @RequestBody ManagedUserVM managedUserVM) throws URISyntaxException {
         log.debug("REST request to save User : {}", managedUserVM);
 
-        if (managedUserVM.getId() != null) {
+		if (!(SecurityUtils.isCurrentUserInRole(AuthoritiesConstants.ADMIN)
+				|| (SecurityUtils.isCurrentUserInRole(AuthoritiesConstants.BROKER)
+						&& managedUserVM.getAuthorities() != null && managedUserVM.getAuthorities().size() == 1
+						&& managedUserVM.getAuthorities().contains(AuthoritiesConstants.BUYER)))) {
+			return ResponseEntity.badRequest()
+					.headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "notauthorized", "Not authorized to create user"))
+					.body(null);
+		} else if (managedUserVM.getId() != null) {
             return ResponseEntity.badRequest()
                 .headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "A new user cannot already have an ID"))
                 .body(null);
@@ -125,9 +133,19 @@ public class UserResource {
      */
     @PutMapping("/users")
     @Timed
-    @Secured(AuthoritiesConstants.ADMIN)
+    @Secured({AuthoritiesConstants.ADMIN, AuthoritiesConstants.BROKER})    
     public ResponseEntity<UserDTO> updateUser(@Valid @RequestBody ManagedUserVM managedUserVM) {
         log.debug("REST request to update User : {}", managedUserVM);
+        
+		if (!(SecurityUtils.isCurrentUserInRole(AuthoritiesConstants.ADMIN)
+				|| (SecurityUtils.isCurrentUserInRole(AuthoritiesConstants.BROKER)
+						&& managedUserVM.getAuthorities() != null && managedUserVM.getAuthorities().size() == 1
+						&& managedUserVM.getAuthorities().contains(AuthoritiesConstants.BUYER)))) {
+			return ResponseEntity.badRequest().headers(
+					HeaderUtil.createFailureAlert(ENTITY_NAME, "notauthorized", "Not authorized to create user"))
+					.body(null);
+		}
+		
         Optional<User> existingUser = userRepository.findOneByEmail(managedUserVM.getEmail());
         if (existingUser.isPresent() && (!existingUser.get().getId().equals(managedUserVM.getId()))) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "emailexists", "Email already in use")).body(null);

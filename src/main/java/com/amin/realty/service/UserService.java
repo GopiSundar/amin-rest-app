@@ -86,9 +86,10 @@ public class UserService {
     		String email, String imageUrl, String langKey) {
 
         User newUser = new User();
-        Authority authority = authorityRepository.findOne(AuthoritiesConstants.USER);
+        Authority authority = authorityRepository.findOne(AuthoritiesConstants.BUYER);
         Set<Authority> authorities = new HashSet<>();
         String encryptedPassword = passwordEncoder.encode(password);
+        //String encryptedPassword = passwordEncoder.encode(RandomUtil.generatePassword());
         newUser.setLogin(login);
         // new user gets initially a generated password
         newUser.setPassword(encryptedPassword);
@@ -105,7 +106,11 @@ public class UserService {
         newUser.setMobileNumber(mobileNumber);
         newUser.setEmail(email);
         newUser.setImageUrl(imageUrl);
-        newUser.setLangKey(langKey);
+        if(langKey == null)
+        	newUser.setLangKey("en");
+        else
+        	newUser.setLangKey(langKey);
+        
         // new user is not active
         newUser.setActivated(false);
         // new user gets registration key
@@ -181,7 +186,11 @@ public class UserService {
             user.setCountry(country);
             user.setMobileNumber(mobileNumber);            
             user.setEmail(email);
-            user.setLangKey(langKey);
+            if(langKey == null)
+            	user.setLangKey("en");
+            else
+            	user.setLangKey(langKey);
+
             user.setImageUrl(imageUrl);
             log.debug("Changed Information for User: {}", user);
         });
