@@ -70,6 +70,9 @@ public class AccountResource {
                     User user = userService
                         .createUser(managedUserVM.getLogin(), managedUserVM.getPassword(),
                             managedUserVM.getFirstName(), managedUserVM.getLastName(),
+                            managedUserVM.getTitle(), managedUserVM.getCompany(), managedUserVM.getAddressLine1(),
+                            managedUserVM.getAddressLine2(), managedUserVM.getCity(), managedUserVM.getState(),
+                            managedUserVM.getZip(), managedUserVM.getCountry(),managedUserVM.getMobileNumber(),
                             managedUserVM.getEmail().toLowerCase(), managedUserVM.getImageUrl(), managedUserVM.getLangKey());
 
                     mailService.sendActivationEmail(user);
@@ -135,7 +138,11 @@ public class AccountResource {
         return userRepository
             .findOneByLogin(userLogin)
             .map(u -> {
-                userService.updateUser(userDTO.getFirstName(), userDTO.getLastName(), userDTO.getEmail(),
+                userService.updateUser(userDTO.getFirstName(), userDTO.getLastName(), 
+                		userDTO.getTitle(), userDTO.getCompany(), userDTO.getAddressLine1(),
+                		userDTO.getAddressLine2(), userDTO.getCity(), userDTO.getState(),
+                		userDTO.getZip(), userDTO.getCountry(),userDTO.getMobileNumber(),                		
+                		userDTO.getEmail(),
                     userDTO.getLangKey(), userDTO.getImageUrl());
                 return new ResponseEntity(HttpStatus.OK);
             })

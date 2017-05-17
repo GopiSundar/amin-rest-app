@@ -51,7 +51,43 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @Size(max = 50)
     @Column(name = "last_name", length = 50)
     private String lastName;
-
+    
+    @Size(max = 5)
+    @Column(name = "title", length = 5)
+    private String title;
+    
+    @Size(max = 100)
+    @Column(name = "company", length = 100)
+    private String company;
+    
+    @Size(max = 100)
+    @Column(name = "address_line1", length = 100)
+    private String addressLine1;
+    
+    @Size(max = 100)
+    @Column(name = "address_line2", length = 100)
+    private String addressLine2;
+    
+    @Size(max = 35)
+    @Column(name = "city", length = 35)
+    private String city;
+    
+    @Size(max = 2)
+    @Column(name = "state", length = 2)
+    private String state;
+    
+    @Size(max = 10)
+    @Column(name = "zip", length = 10)
+    private String zip;
+    
+    @Size(max = 50)
+    @Column(name = "country", length = 50)
+    private String country;
+    
+    @Size(max = 15)
+    @Column(name = "mobile_number", length = 15)
+    private String mobileNumber;
+    
     @Email
     @Size(min = 5, max = 100)
     @Column(length = 100, unique = true)
@@ -133,7 +169,80 @@ public class User extends AbstractAuditingEntity implements Serializable {
         this.lastName = lastName;
     }
 
-    public String getEmail() {
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public String getCompany() {
+		return company;
+	}
+
+	public void setCompany(String company) {
+		this.company = company;
+	}
+
+	public String getAddressLine1() {
+		return addressLine1;
+	}
+
+	public void setAddressLine1(String addressLine1) {
+		this.addressLine1 = addressLine1;
+	}
+
+	public String getAddressLine2() {
+		return addressLine2;
+	}
+
+	public void setAddressLine2(String addressLine2) {
+		this.addressLine2 = addressLine2;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
+
+	public String getZip() {
+		return zip;
+	}
+
+	public void setZip(String zip) {
+		this.zip = zip;
+	}
+
+	public String getCountry() {
+		return country;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
+
+	public String getMobileNumber() {
+		return mobileNumber;
+	}
+
+	public void setMobileNumber(String mobileNumber) {
+		this.mobileNumber = mobileNumber;
+	}
+
+	public String getEmail() {
         return email;
     }
 
@@ -195,6 +304,8 @@ public class User extends AbstractAuditingEntity implements Serializable {
     public void setAuthorities(Set<Authority> authorities) {
         this.authorities = authorities;
     }
+    
+    
 
     @Override
     public boolean equals(Object o) {
@@ -221,6 +332,15 @@ public class User extends AbstractAuditingEntity implements Serializable {
             "login='" + login + '\'' +
             ", firstName='" + firstName + '\'' +
             ", lastName='" + lastName + '\'' +
+            ", title='" + title + '\'' +
+            ", company='" + company + '\'' +
+            ", addressLine1='" + addressLine1 + '\'' +
+            ", addressLine2='" + addressLine2 + '\'' +
+            ", city='" + city + '\'' +
+            ", state='" + state + '\'' +
+            ", zip='" + zip + '\'' +
+            ", country='" + country + '\'' +
+            ", mobileNumber='" + mobileNumber + '\'' +
             ", email='" + email + '\'' +
             ", imageUrl='" + imageUrl + '\'' +
             ", activated='" + activated + '\'' +

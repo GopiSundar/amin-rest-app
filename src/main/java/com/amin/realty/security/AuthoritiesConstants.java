@@ -10,6 +10,10 @@ public final class AuthoritiesConstants {
     public static final String USER = "ROLE_USER";
 
     public static final String ANONYMOUS = "ROLE_ANONYMOUS";
+    
+    public static final String BROKER = "ROLE_BROKER";
+    
+    public static final String BUYER = "ROLE_BUYER";
 
     private AuthoritiesConstants() {
     }

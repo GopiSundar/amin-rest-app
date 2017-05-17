@@ -80,8 +80,10 @@ public class UserService {
             });
     }
 
-    public User createUser(String login, String password, String firstName, String lastName, String email,
-        String imageUrl, String langKey) {
+    public User createUser(String login, String password, String firstName, String lastName, 
+        	String title, String company, String addressLine1, String addressLine2,
+        	String city, String state, String zip, String country, String mobileNumber,    		
+    		String email, String imageUrl, String langKey) {
 
         User newUser = new User();
         Authority authority = authorityRepository.findOne(AuthoritiesConstants.USER);
@@ -92,6 +94,15 @@ public class UserService {
         newUser.setPassword(encryptedPassword);
         newUser.setFirstName(firstName);
         newUser.setLastName(lastName);
+        newUser.setTitle(title);
+        newUser.setCompany(company);
+        newUser.setAddressLine1(addressLine1);
+        newUser.setAddressLine2(addressLine2);
+        newUser.setCity(city);
+        newUser.setState(state);
+        newUser.setZip(zip);
+        newUser.setCountry(country);
+        newUser.setMobileNumber(mobileNumber);
         newUser.setEmail(email);
         newUser.setImageUrl(imageUrl);
         newUser.setLangKey(langKey);
@@ -111,6 +122,15 @@ public class UserService {
         user.setLogin(userDTO.getLogin());
         user.setFirstName(userDTO.getFirstName());
         user.setLastName(userDTO.getLastName());
+        user.setTitle(userDTO.getTitle());
+        user.setCompany(userDTO.getCompany());
+        user.setAddressLine1(userDTO.getAddressLine1());
+        user.setAddressLine2(userDTO.getAddressLine2());
+        user.setCity(userDTO.getCity());
+		user.setZip(userDTO.getZip());
+        user.setState(userDTO.getState());
+        user.setCountry(userDTO.getCountry());
+        user.setMobileNumber(userDTO.getMobileNumber());
         user.setEmail(userDTO.getEmail());
         user.setImageUrl(userDTO.getImageUrl());
         if (userDTO.getLangKey() == null) {
@@ -144,10 +164,22 @@ public class UserService {
      * @param langKey language key
      * @param imageUrl image URL of user
      */
-    public void updateUser(String firstName, String lastName, String email, String langKey, String imageUrl) {
+    public void updateUser(String firstName, String lastName,
+        	String title, String company, String addressLine1, String addressLine2,
+        	String city, String state, String zip, String country, String mobileNumber,     		
+    		String email, String langKey, String imageUrl) {
         userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin()).ifPresent(user -> {
             user.setFirstName(firstName);
             user.setLastName(lastName);
+            user.setTitle(title);
+            user.setCompany(company);
+            user.setAddressLine1(addressLine1);
+            user.setAddressLine2(addressLine2);
+            user.setCity(city);
+            user.setState(state);
+			user.setZip(zip);
+            user.setCountry(country);
+            user.setMobileNumber(mobileNumber);            
             user.setEmail(email);
             user.setLangKey(langKey);
             user.setImageUrl(imageUrl);
@@ -168,6 +200,15 @@ public class UserService {
                 user.setLogin(userDTO.getLogin());
                 user.setFirstName(userDTO.getFirstName());
                 user.setLastName(userDTO.getLastName());
+                user.setTitle(userDTO.getTitle());
+                user.setCompany(userDTO.getCompany());
+                user.setAddressLine1(userDTO.getAddressLine1());
+                user.setAddressLine2(userDTO.getAddressLine2());
+                user.setCity(userDTO.getCity());
+                user.setState(userDTO.getState());
+                user.setZip(userDTO.getZip());
+                user.setCountry(userDTO.getCountry());
+                user.setMobileNumber(userDTO.getMobileNumber());                
                 user.setEmail(userDTO.getEmail());
                 user.setImageUrl(userDTO.getImageUrl());
                 user.setActivated(userDTO.isActivated());

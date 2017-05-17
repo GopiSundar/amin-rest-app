@@ -25,6 +25,15 @@
             <column name="password_hash" type="varchar(60)"/>
             <column name="first_name" type="varchar(50)"/>
             <column name="last_name" type="varchar(50)"/>
+            <column name="title" type="varchar(5)"/>
+            <column name="company" type="varchar(100)"/>
+            <column name="address_line1" type="varchar(100)"/>
+            <column name="address_line2" type="varchar(100)"/>
+            <column name="city" type="varchar(35)"/>
+            <column name="state" type="varchar(2)"/>
+            <column name="zip" type="varchar(10)"/>
+            <column name="country" type="varchar(50)"/>
+            <column name="mobile_number" type="varchar(15)"/>
             <column name="email" type="varchar(100)">
                 <constraints unique="true" nullable="true"/>
             </column>
