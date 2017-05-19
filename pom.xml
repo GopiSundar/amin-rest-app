@@ -90,6 +90,8 @@
         <spring-cloud.version>Dalston.RELEASE</spring-cloud.version>
         <springfox.version>2.6.1</springfox.version>
         <validation-api.version>1.1.0.Final</validation-api.version>
+        <opencsv.version>3.9</opencsv.version>
+        <apache.poi.version>3.15</apache.poi.version>
     </properties>
 
     <dependencyManagement>
@@ -376,6 +378,25 @@
             <artifactId>spring-security-data</artifactId>
         </dependency>
         <!-- jhipster-needle-maven-add-dependency -->
+        
+        <!-- https://mvnrepository.com/artifact/com.opencsv/opencsv -->
+		<dependency>
+		    <groupId>com.opencsv</groupId>
+		    <artifactId>opencsv</artifactId>
+		    <version>${opencsv.version}</version>
+		</dependency>
+        
+        <dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+			<version>${apache.poi.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+			<version>${apache.poi.version}</version>
+		</dependency>
     </dependencies>
     <build>
         <defaultGoal>spring-boot:run</defaultGoal>

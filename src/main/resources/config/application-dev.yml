@@ -35,9 +35,12 @@ spring:
     datasource:
         type: com.zaxxer.hikari.HikariDataSource
         #url: jdbc:mysql://localhost:3306/AminRestApp?useUnicode=true&characterEncoding=utf8&useSSL=false
-        url: jdbc:mysql://localhost:3306/amintest?useUnicode=true&characterEncoding=utf8&useSSL=false
+        url: jdbc:mysql://localhost:3306/amin?useUnicode=true&characterEncoding=utf8&useSSL=false
         username: test
         password: test
+        test-on-borrow: true
+        validation-query: select 1 from dual
+        maxPoolSize: 100
         hikari:
             data-source-properties:
                 cachePrepStmts: true

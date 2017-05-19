@@ -10,6 +10,9 @@ public final class Constants {
 
     public static final String SYSTEM_ACCOUNT = "system";
     public static final String ANONYMOUS_USER = "anonymoususer";
+    
+	public static final String EMAIL_MASK_REGEX = "(?<=.{1}).(?=.*@)";
+	public static final String EMAIL_MASK_VAL = "X";
 
     private Constants() {
     }
