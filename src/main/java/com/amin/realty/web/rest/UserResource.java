@@ -23,8 +23,11 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.HandlerMapping;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -179,7 +182,8 @@ public class UserResource {
      */
     @GetMapping("/users/authorities")
     @Secured(AuthoritiesConstants.ADMIN)
-    public List<String> getAuthorities() {
+    public List<String> getAuthorities(HttpServletRequest request) {
+    	System.err.println(request.getServerName());
         return userService.getAuthorities();
     }
 

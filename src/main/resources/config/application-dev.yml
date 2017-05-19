@@ -58,10 +58,12 @@ spring:
             hibernate.cache.use_minimal_puts: true
             hibernate.cache.hazelcast.use_lite_member: true
     mail:
-        host: localhost
+        smtp:
+            auth: true
+        host: email-smtp.us-east-1.amazonaws.com
         port: 25
-        username:
-        password:
+        username: AKIAIF4KD7XCVSLGSQZA
+        password: AlN8bpPKAjK46X9hdJ//RthzBV7SYo7wxMEkjuu6KOfR
     messages:
         cache-seconds: 1
     thymeleaf:
@@ -125,7 +127,7 @@ jhipster:
                 token-validity-in-seconds: 86400
                 token-validity-in-seconds-for-remember-me: 2592000
     mail: # specific JHipster mail property, for standard properties see MailProperties
-        from: AminRestApp@localhost
+        from: gopi.sundar123@gmail.com
         base-url: http://127.0.0.1:8080
     metrics: # DropWizard Metrics configuration, used by MetricsConfiguration
         jmx.enabled: true
@@ -157,3 +159,8 @@ jhipster:
 # ===================================================================
 
 application:
+
+cloud:
+    aws:
+        region:
+            static: us-east-1 
