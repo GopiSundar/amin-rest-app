@@ -63,5 +63,16 @@ end $$
 
 DELIMITER ;
 
+DROP PROCEDURE IF EXISTS proc_get_property;
+
+DELIMITER $$
+
+CREATE PROCEDURE proc_get_property (IN in_tenantid char(36))
+begin
+	Select metadata from property where tenant_id = in_tenantid;
+end $$
+
+DELIMITER ;
+
 
 INSERT INTO tenant values ('65ad46c8-0c56-466b-b94d-1a5427edb1e8','localhost');

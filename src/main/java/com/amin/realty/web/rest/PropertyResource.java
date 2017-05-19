@@ -1,15 +1,20 @@
 package com.amin.realty.web.rest;
 
 import java.net.URISyntaxException;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,8 +25,12 @@ import com.amin.realty.security.AuthoritiesConstants;
 import com.amin.realty.service.MailService;
 import com.amin.realty.service.PropertyService;
 import com.amin.realty.service.TenantService;
+import com.amin.realty.service.dto.UserDTO;
 import com.amin.realty.service.util.Result;
+import com.amin.realty.web.rest.util.PaginationUtil;
 import com.codahale.metrics.annotation.Timed;
+
+import io.swagger.annotations.ApiParam;
 
 /**
  * REST controller for managing properties.
@@ -52,9 +61,9 @@ public class PropertyResource {
 		log.debug("REST request to create Property : {}", metadata);
 		ResponseEntity<?> response;
 		String tenantId = TenantService.getTenantId(request.getServerName());
-		
+
 		Result result = propertyService.createProperty(tenantId, metadata);
-		
+
 		if (result.getResult()) {
 			response = new ResponseEntity<>(result.getData(), HttpStatus.CREATED);
 		} else {
@@ -64,7 +73,7 @@ public class PropertyResource {
 		return response;
 
 	}
-	
+
 	@PutMapping("/properties")
 	@Timed
 	@Secured({ AuthoritiesConstants.ADMIN, AuthoritiesConstants.BROKER })
@@ -73,9 +82,9 @@ public class PropertyResource {
 		log.debug("REST request to update Property : {}", metadata);
 		ResponseEntity<?> response;
 		String tenantId = TenantService.getTenantId(request.getServerName());
-		
+
 		Result result = propertyService.updateProperty(tenantId, metadata);
-		
+
 		if (result.getResult()) {
 			response = new ResponseEntity<>(result.getData(), HttpStatus.OK);
 		} else {
@@ -85,7 +94,23 @@ public class PropertyResource {
 		return response;
 
 	}
-	
-	
+
+	@GetMapping("/properties")
+	@Timed
+	public ResponseEntity<?> getProperties(@ApiParam HttpServletRequest request) {
+		ResponseEntity<?> response;
+
+		String tenantId = TenantService.getTenantId(request.getServerName());
+		
+		System.err.println(tenantId);
+		Result result = propertyService.fetchProperties(tenantId);
+		if (result.getResult()) {
+			response = new ResponseEntity<>(result.getData(), HttpStatus.OK);
+		} else {
+			response = new ResponseEntity<>(result.getMessage(), HttpStatus.BAD_REQUEST);
+		}
+		
+		return response;
+	}
 
 }

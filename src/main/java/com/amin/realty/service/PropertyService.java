@@ -82,4 +82,11 @@ public class PropertyService {
 		return result;
 	}
 
+	public Result fetchProperties(String tenantId) {
+
+		
+		return propertyRepository.fetchProperties(tenantId);
+
+	}
+
 }
