@@ -1,6 +1,7 @@
 package com.amin.realty.service;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.UUID;
 
 import org.slf4j.Logger;
@@ -12,6 +13,8 @@ import com.amin.realty.domain.PropertyDO;
 import com.amin.realty.repository.PropertyRepository;
 import com.amin.realty.service.util.Result;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 /**
@@ -84,8 +87,28 @@ public class PropertyService {
 
 	public Result fetchProperties(String tenantId) {
 
-		
-		return propertyRepository.fetchProperties(tenantId);
+		Result result = propertyRepository.fetchProperties(tenantId);
+		if (result.getResult()) {
+			List<String> list = (List<String>) result.getData();
+
+			final JsonNodeFactory factory = JsonNodeFactory.instance;
+
+			ArrayNode array = factory.arrayNode();
+
+			ObjectMapper mapper = new ObjectMapper();
+			list.forEach(property -> {
+				try {
+					array.add(mapper.readTree(property));
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			});
+
+			result = new Result(true, null, array.toString());
+
+		}
+
+		return result;
 
 	}
 
