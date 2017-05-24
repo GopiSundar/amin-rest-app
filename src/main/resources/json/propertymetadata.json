@@ -1,0 +1,1 @@
+[{"key":"title","required":true,"visibleFrom":0.1,"default":"Property title"},{"key":"description","required":true,"visibleFrom":0.1,"default":"Property description"},{"key":"price","required":true,"visibleFrom":0.1,"default":"100000"},{"key":"location","required":true,"visibleFrom":0.1,"default":"map location"},{"key":"images","required":false,"visibleFrom":0.1}]

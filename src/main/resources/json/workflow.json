@@ -1,0 +1,38 @@
+[
+  {
+    "id": "10",
+    "name": "Created"
+  },
+  {
+    "id": "20",
+    "name": "Submitted for details"
+  },
+  {
+    "id": "30",
+    "name": "NDA Requested"
+  },
+  {
+    "id": "40",
+    "name": "NDA signed"
+  },
+  {
+    "id": "50",
+    "name": "NDA accepted"
+  },
+  {
+    "id": "60",
+    "name": "Waiting for Financial qualification"
+  },
+  {
+    "id": "70",
+    "name": "Deal booked"
+  },
+  {
+    "id": "80",
+    "name": "Deal closed"
+  },
+  {
+    "id": "0",
+    "name": "Deal Cancelled"
+  }
+]

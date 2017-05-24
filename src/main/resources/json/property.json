@@ -1,0 +1,12 @@
+{
+  "id": 1,
+  "title":"prop title",
+  "description":"prop description",
+  "price":"500000",
+  "location":"Houston",
+  "images":[
+    "e88d6f8c-2eac-4a87-9d3c-352f92224865",
+    "661f27dc-7ea6-4720-863a-bc6d95009c9b",
+    "eff560c2-8474-417c-8b75-97ffb82ec5b7"
+    ]
+}
